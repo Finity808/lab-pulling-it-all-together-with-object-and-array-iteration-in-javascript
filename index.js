@@ -114,3 +114,101 @@ function gameObject() {
         },
     };
 }
+/// 1. numPointsScored(playerName)
+function numPointsScored(playerName) {
+    const game = gameObject();
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      for (let playerKey in team.players) {
+        let player = team.players[playerKey];
+        if (playerKey === playerName) {
+          return player.points;
+        }
+      }
+    }
+  }
+  
+  // 2. shoeSize(playerName)
+  function shoeSize(playerName) {
+    const game = gameObject();
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      for (let playerKey in team.players) {
+        let player = team.players[playerKey];
+        if (playerKey === playerName) {
+          return player.shoe;
+        }
+      }
+    }
+  }
+  
+  // 3. teamColors(teamName)
+  function teamColors(teamName) {
+    const game = gameObject();
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      if (team.teamName === teamName) {
+        return team.colors;
+      }
+    }
+  }
+  
+  // 4. teamNames()
+  function teamNames() {
+    const game = gameObject();
+    return Object.values(game).map(team => team.teamName);
+  }
+  
+  // 5. playerNumbers(teamName)
+  function playerNumbers(teamName) {
+    const game = gameObject();
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      if (team.teamName === teamName) {
+        return Object.values(team.players).map(player => player.number);
+      }
+    }
+  }
+  
+  // 6. playerStats(playerName)
+  function playerStats(playerName) {
+    const game = gameObject();
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      for (let playerKey in team.players) {
+        let player = team.players[playerKey];
+        if (playerKey === playerName) {
+          return {
+            number: player.number,
+            shoe: player.shoe,
+            points: player.points,
+            rebounds: player.rebounds,
+            assists: player.assists,
+            steals: player.steals,
+            blocks: player.blocks,
+            slamDunks: player.slamDunks,
+          };
+        }
+      }
+    }
+  }
+  
+  // 7. bigShoeRebounds()
+  function bigShoeRebounds() {
+    const game = gameObject();
+    let largestShoeSize = 0;
+    let playerWithLargestShoe;
+    
+    for (let teamKey in game) {
+      let team = game[teamKey];
+      for (let playerKey in team.players) {
+        let player = team.players[playerKey];
+        if (player.shoe > largestShoeSize) {
+          largestShoeSize = player.shoe;
+          playerWithLargestShoe = player;
+        }
+      }
+    }
+    
+    return playerWithLargestShoe.rebounds;
+  }
